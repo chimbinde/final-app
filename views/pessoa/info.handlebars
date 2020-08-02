@@ -1,0 +1,180 @@
+<!-- Content Header (Page header) -->
+
+
+<div id="iderror" class="alert"
+  style="display:none;border-left: 5px solid #CD6155; margin-left:10px; background-color:#F9EBEA; color:#CD6155"
+  role="alert">
+  Não foi possivel carregar página, falha de conexão..
+</div>
+<div id="divspiner" class="divspiner">
+  <!-- div usada para animacao de loading -->
+</div>
+<div class="content-header" id="divcontainer2" style="display:none;">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0 text-dark">Dados do usuario </h1>
+        <input type="hidden" id="idpessoa_" name="idpessoa_" value="{{user.key}}"></input>
+        <!--<input type="hidden" id="idpessoa_" name="idpessoa_" value="{{user.key}}" ></input>-->
+      </div><!-- /.col -->
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="/" style="color:#6A5ACD;">Inicio</a></li>
+        </ol>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<!-- Main content -->
+<section class="content" id="divcontainer" style="display:none;">
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4 ">
+        <div class="card ">
+          <div class="card-body">
+
+            <div class="row" style="background-color:#F8F9F9 ;">
+              <div class="col-md-6">
+                <img src="/img/img7.jpg" style="margin-left: 2%;" class="avatar  img-thumbnail mt-0" alt="avatar"
+                  width="96%">
+                <!-- <a class="users-list-name text-center" href="#">Perfil/s:</a> -->
+                <!-- <p style="color:black;"></i>Eng </p>-->
+              </div>
+              <div class="col-md-6 mt-2">
+                <h4 id="apelido_c">Chimbinde</h4>
+                <h5 style="font-size: 16px;" id="nome_c">Francisco Jaime</h5>
+              </div>
+            </div>
+            <div class="row">
+              <p class="mt-3">
+                &nbsp <i class="fa fa-envelope" style="color: #6A5ACD;"></i>&nbsp <font id="email_c"
+                  style="color:#6A5ACD;">chimbinde001@gmail.com</font>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="card ">
+          <div class="card-body">
+            <table class="table table-striped">
+              <tr>
+                <td>Sobre o registo </td>
+              </tr>
+              <tr>
+                <td>Criado aos <font id="criado"></font>
+                </td>
+              </tr>
+              <tr>
+                <td>Editado aos <font id="editado"></font>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <!-- novos dados .....  -->
+        <!-- SELECT2 EXAMPLE -->
+        <div class="card card-default">
+          <!-- /.card-header -->
+          <form action="/aluno/atualizacao" method="post">
+            <input type="hidden" id="idpessoa" name="idpessoa" value="{{user.key}}"></input>
+
+            <div class="card-body">
+              <font> DADOS DO USUARIO</font>
+              <hr>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Tipo usuario</label>
+                    <select name="isestudante" id="isestudante" class="form-control select2bs4" style="width: 100%;">
+                      <option value="-1">Estudante e Funcionario</option>
+                      <option value="1" selected="selected">Estudante</option>
+                      <option value="0">Funcionario</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Pais</label>
+                    <select id="idpais" name="idpais" class="form-control select2bs4" style="width: 100%;">
+                      <option value="165" selected="selected">Mozambique</option>
+                      <option value="10">Angolao</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleDataNasc">Data Nasc</label>
+                    <input type="date" class="form-control" name="datanasc" id="datanasc" placeholder="Digite a data">
+                  </div>
+                  <!-- /.form-group -->
+                  <div class="form-group">
+                    <label>Sexo</label>
+                    <select id="idsexo" class="form-control select2bs4" style="width: 100%;">
+                      <option value="0" selected="selected">Femenino</option>
+                      <option value="1">Masculino</option>
+                    </select>
+                  </div>
+
+                  <!-- /.form-group -->
+                </div>
+                <!-- /.col -->
+                <div class="col-md-6">
+                  <!-- /.form-group -->
+                  <div class="form-group">
+                    <label for="nome">Nome</label>
+                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Digite nome">
+                  </div>
+                  <!-- /.form-group -->
+                  <div class="form-group">
+                    <label for="apelido">Apelido</label>
+                    <input type="text" class="form-control" id="apelido" placeholder="Digite apelido">
+                  </div>
+                  <!-- /.form-group -->
+                  <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter email">
+                  </div>
+                  <div class="form-group">
+                    <label>Escola</label>
+                    <select id="escola" class="form-control select2bs4" style="width: 100%;">
+                      <!-- <option value='0'selected="selected">Mapara</option>
+                      <option value='1'>Secundaria</option> -->
+                    </select>
+                  </div>
+                </div>
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+              <hr>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="exampleNome">Senha</label>
+                    <input type="password" class="form-control" id="password" placeholder="Digite senha" disabled>
+                  </div>
+
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="exampleNome">Salvar</label>
+                    <button class="btn btn-info form-control salvar" id="salvar" type="submit"
+                      onclick="atualizar_dados();">Salvar</button>
+                  </div>
+
+                </div>
+
+
+              </div>
+
+            </div>
+          </form>
+        </div>
+        <!-- /.card -->
+
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<script src="/js/pro_js/pessoa.js"></script>

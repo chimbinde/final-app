@@ -1,0 +1,185 @@
+<!-- Main Sidebar Container -->
+<!-- class="main-sidebar sidebar-dark-primary elevation-4" -->
+<aside class="main-sidebar sidebar-light-primary elevation-0"
+  style="background-image: url('/img/img6.jpg');background-repeat:no-repeat;background-size: cover;">
+  <!-- Brand Logo -->
+  <a href="index3.html" class="brand-link " style="text-align:center">
+   
+      <img src="/img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+           style="opacity: .8"> 
+    <span class="brand-text font-weight-light ">EXAME ONLINE</span>
+  </a>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- Sidebar user panel (optional) -->
+    <div class="user-panel " style="text-align: center;">
+      <br>
+      <p class="nav-header" style="font-size:14px;margin-top:10px;">MENU</p>
+      <br>
+    </div>
+    <div class="user-panel ">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <li class="nav-item">
+          <a href="/inicio" class="nav-link">
+            <i class="nav-icon fas fa-home"></i>
+            <p>
+              Início 
+            </p>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+
+    {{#if user}}
+    <!-- ==============  parte do menu para configuracao ========================= -->
+    <!--
+    <div class="user-panel " style="text-align: center;">
+      <p class="nav-header" style="font-size:14px;margin-top:10px;">CONFIGURACAO</p>
+    </div> -->
+    <div class="user-panel ">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+        <li class="nav-item">
+          <a href="/pessoa/info" class="nav-link">
+            <i class="nav-icon fas fa-book"></i>
+            <p>
+             Gerir informação
+             
+            </p>
+          </a>
+        </li>
+      </ul>
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+<!--
+        <li class="nav-item">
+          <a href="pages/widgets.html" class="nav-link">
+            <p>
+              OUTRAS CONFIGURACOES
+              <span class="right badge badge-danger">New</span>
+            </p>
+          </a>
+        </li>-->
+      </ul>
+    </div>
+    <!-- ============== fim  parte do menu para configuracao ========================= -->
+
+    {{#if user.admin}}
+
+    <!-- ============== parte do menu para o professor ========================= -->
+    <!--
+      div class="user-panel " style="text-align: center;">
+      <p class="nav-header" style="font-size:14px;margin-top:10px;">PROFESSOR</p>
+    </div> -->
+    <div class="user-panel ">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <li class="nav-item">
+          <a href="/aluno/pag_disciplinas" class="nav-link">
+            <i class="nav-icon fas fa-folder"></i>
+            <p>
+              Minhas disciplinas
+              
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="pages/widgets.html" class="nav-link">
+            <i class="nav-icon fas fa-file"></i>
+            <p>
+              minhas Inscrições
+              
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="pages/widgets.html" class="nav-link">
+            <i class="nav-icon fas fa-clone"></i>
+            <p>
+             Gerir Avaliações
+              
+            </p>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <!-- ============== fim parte do menu para o professor ========================= -->
+
+
+
+    {{else}}
+    <!-- ============== parte do menu para o Estudante ========================= -->
+   <!--
+    <div class="user-panel " style="text-align: center;">
+      <p class="nav-header" style="font-size:14px;margin-top:10px;">ESTUDANTE-ALUNO</p>
+    </div> -->
+    <div class="user-panel ">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+        <li class="nav-item">
+          <a href="pages/widgets.html" class="nav-link">
+            <i class="nav-icon fas fa-file"></i>
+            <p>
+               Minhas Inscrições
+            
+            </p>
+          </a>
+        </li>
+      </ul>
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+        <li class="nav-item">
+          <a href="pages/widgets.html" class="nav-link">
+            <i class="nav-icon fas fa-clone"></i>
+            <p>
+              Minhas Inscrições
+             
+            </p>
+          </a>
+        </li>
+      </ul>
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+        <li class="nav-item">
+          <a href="pages/widgets.html" class="nav-link">
+            <i class="nav-icon fas fa-folder"></i>
+            <p>
+              Efetuar avaliação
+       
+            </p>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <!-- ============== fim da parte do menu para o estudante ========================= -->
+    {{/if}}
+
+
+
+    {{else}}
+    <!-- ==============  parte do menu para o visitantes ========================= -->
+    <div class="user-panel ">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <li class="nav-item">
+          <a href="/aluno/cadastro" class="nav-link">
+            <i class="nav-icon fas fa-user-circle"></i>
+            <p>
+              Novo cadastro
+           
+            </p>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <!-- ============== fim  parte do menu para o visitantes ========================= -->
+    {{/if}}
+
+
+
+
+
+
+
+  </div>
+
+  <!-- /.sidebar -->
+</aside>

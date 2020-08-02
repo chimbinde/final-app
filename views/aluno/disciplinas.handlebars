@@ -1,0 +1,128 @@
+<!-- Content Header (Page header) -->
+<link rel="stylesheet" href="/css/pro/extra.css">
+<div class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0 text-dark">Minhas disciplinas</h1>
+      </div><!-- /.col -->
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <!-- <li class="breadcrumb-item "><a class="btn btn-info" href="/">Nova</a></li> -->
+          <!--
+          <li class="breadcrumb-item">
+            <button type="button" class="btn btn-info btn-circle"><i class="fa fa-plus"></i>
+            </button>
+          </li> -->
+          <li class="breadcrumb-item"></li>
+          <button type="button" class="btn btn-primary btn-circle" onclick="load_modal($(this));"  data-toggle="modal" data-target="#form_add_disc">
+            <i class="fa fa-plus"></i>
+          </button> </li>
+          <li class="breadcrumb-item">
+            <button type="button" class="btn btn-danger btn-circle"><i class="fa fa-plus"></i>
+            </button>
+          </li>
+        </ol>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<!-- Modal -->
+<div class="modal fade" id="form_add_disc" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Adicionar disciplinas</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="cardbody_lista">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="adicionar-tab" data-toggle="tab" href="#adicionar" role="tab"
+              aria-controls="adicionar" aria-selected="true">Adicionar disciplina</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="listar-tab" data-toggle="tab" href="#listar" role="tab" aria-controls="listar"
+              aria-selected="false">Listar</a>
+          </li>
+          <!--
+          <li class="nav-item">
+            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
+              aria-selected="false">Contact</a>
+          </li> -->
+        </ul>
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="adicionar" role="tabpanel" aria-labelledby="adicionar-tab">
+
+            <table class="table table-striped">
+              <tr>
+                <td>
+                  <div class="form-group">
+                    <label>Categoria da disciplina</label>
+                    <select id="select_categoria" name="select_idcategoria" class="form-control select2bs4" style="width: 100%;">
+                      <option value="-1" selected="selected">Selecione a categoria..</option>
+                    </select>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="form-group">
+                    <label>Disciplinas</label>
+                    <select id="iddisciplinas" name="iddisciplinas" class="form-control select2bs4"
+                      style="width: 100%;">
+                      <option value="-1" selected="selected">Selecione a disciplina..</option>
+                    </select>
+                  </div>
+
+                </td>
+              </tr>
+            </table>
+
+          </div>
+          <div class="tab-pane fade" id="listar" role="tabpanel" aria-labelledby="listar-tab">
+
+            <table class="table table-striped">
+              <tr>
+                <td>Disciplina 3</td>
+              </tr>
+              <tr>
+                <td>Disciplina 3</td>
+              </tr>
+            </table>
+
+
+          </div>
+          <!--<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div> -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <!--
+        <button type="button" onclick="selecionar_operacao($(this));" class="btn btn-info ch"
+          data-dismiss="modal">lista</button>
+        <button type="button" onclick="selecionar_operacao($(this));" class="btn btn-info ch"
+          data-dismiss="modal">sel</button> -->
+
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-primary">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid">
+    <!-- Info boxes -->
+    <div class="row" id="lista_disciplinas" name="lista_disciplinas">
+
+      <!-- Card -->
+    </div>
+  </div>
+  <!-- /.row -->
+</section>
+<script src="/js/pro_js/disciplinas_aluno.js"></script>

@@ -1,0 +1,140 @@
+<!-- Content Header (Page header) -->
+<div class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0 text-dark">Formulario de Cadastro</h1>
+      </div><!-- /.col -->
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+        </ol>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid">
+    <!-- Info boxes -->
+
+
+    <div class="row">
+      <div class="card card-default">
+        <!-- /.card-header -->
+        <form action="/aluno/atualizacao" method="post">
+          <input type="hidden" id="idpessoa" name="idpessoa" value="{{user.key}}"></input>
+
+          <div class="card-body">
+            <font> DADOS DO USUARIO</font>
+            <hr>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Tipo usuario</label>
+                  <select name="isestudante" id="isestudante" class="form-control select2bs4" style="width: 100%;">
+                    <option value="-1">Estudante e Funcionario</option>
+                    <option value="1" selected="selected">Estudante</option>
+                    <option value="0">Funcionario</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Pais</label>
+                  <select id="idpais" name="idpais" onchange="atualizou_pais_natural($(this))" class="form-control select2bs4" style="width: 100%;">
+                    <option value="165" selected="selected">Mozambique</option>
+                    <option value="10">Angolao</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Provincia natural</label>
+                  <select id="idprovincianatural"  name="idprovincianatural" class="form-control select2bs4" style="width: 100%;">
+                    <option value="-1" selected="selected">Selecione a provincia..</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="exampleDataNasc">Data Nasc</label>
+                  <input type="date" class="form-control" name="datanasc" id="datanasc" placeholder="Digite a data">
+                </div>
+                <!-- /.form-group -->
+                <div class="form-group">
+                  <label>Sexo</label>
+                  <select id="idsexo" class="form-control select2bs4" style="width: 100%;">
+                    <option value="0" selected="selected">Femenino</option>
+                    <option value="1">Masculino</option>
+                  </select>
+                </div>
+
+                <!-- /.form-group -->
+              </div>
+              <!-- /.col -->
+              <div class="col-md-6">
+                <!-- /.form-group -->
+                <div class="form-group">
+                  <label for="nome">Nome</label>
+                  <input type="text" class="form-control" name="nome" id="nome" placeholder="Digite nome">
+                </div>
+                <!-- /.form-group -->
+                <div class="form-group">
+                  <label for="apelido">Apelido</label>
+                  <input type="text" class="form-control" id="apelido" placeholder="Digite apelido">
+                </div>
+                <!-- /.form-group -->
+                <div class="form-group">
+                  <label for="email">Email address</label>
+                  <input type="email" class="form-control" id="email" placeholder="Enter email">
+                </div>
+
+                <div class="form-group">
+                  <label>Pais escola</label>
+                  <select id="idpaisescola" onchange="atualizou_pais_escola($(this))" name="idpaisescola" class="form-control select2bs4" style="width: 100%;">
+                    <option value="165" selected="selected">Mozambique</option>
+                    <option value="10">Angolao</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Provincia escola</label>
+                  <select id="idprovinciaescola" onchange="atualizou_provincia_escola($(this))" name="idprovinciaescola" class="form-control select2bs4" style="width: 100%;">
+                    <option value="-1" selected="selected">Selecione a provincia..</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label>Escola</label>
+                  <select id="escola" class="form-control select2bs4" style="width: 100%;">
+                    <!-- <option value='0'selected="selected">Mapara</option>
+                      <option value='1'>Secundaria</option> -->
+                  </select>
+                </div>
+              </div>
+              <!-- /.col -->
+            </div>
+            <!-- /.row -->
+            <hr>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="exampleNome">Senha</label>
+                  <input type="password" class="form-control" id="password" placeholder="Digite senha">
+                </div>
+
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="exampleNome">Salvar</label>
+                  <button class="btn btn-info form-control salvar" id="salvar" type="submit"
+                    onclick="submeter_novos_dados();">Salvar</button>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </form>
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<script src="/js/pro_js/aluno.js"></script>

@@ -1,0 +1,16 @@
+[
+    {
+      "key": 1,
+      "nome": "Joana Maria ",
+      "email": "jomaria@gmail.com",
+      "senha": "$2a$10$FWkO6SVUMvEKrlinVgOuXOjkJbUyvZMficj5/zDdpoIZIZtjfj3UO",
+      "admin": 0
+    },
+    {
+      "key": 2,
+      "nome": "Sampaio antonio",
+      "email": "admin@gmail.com",
+      "senha": "$2a$10$1umHSSO06YA3fgzRxu7guuWOtpAEAieOYaWWJqv3wtW6GIm61XYjG",
+      "admin": 1
+    }
+  ]
