@@ -1,10 +1,17 @@
 <!-- Content Header (Page header) -->
 <link rel="stylesheet" href="/css/pro/extra.css">
+<!--
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">-->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.bootstrap4.min.css">
+
 <div class="content-header">
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
         <h1 class="m-0 text-dark">Minhas disciplinas</h1>
+        <!-- <input type="hidden" id="idpessoa" name="idpessoa" value="{{user.key}}"></input> -->
+        <input type="hidden" id="idpessoa" name="idpessoa" value="1"></input>
       </div><!-- /.col -->
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
@@ -15,7 +22,7 @@
             </button>
           </li> -->
           <li class="breadcrumb-item"></li>
-          <button type="button" class="btn btn-primary btn-circle" onclick="load_modal($(this));"  data-toggle="modal" data-target="#form_add_disc">
+          <button type="button" class="btn btn-primary btn-circle" data-toggle="modal" data-target="#form_add_disc">
             <i class="fa fa-plus"></i>
           </button> </li>
           <li class="breadcrumb-item">
@@ -29,8 +36,8 @@
 </div>
 <!-- /.content-header -->
 <!-- Modal -->
-<div class="modal fade" id="form_add_disc" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
+<div class="modal fade" onfocus="load_modal($(this));" id="form_add_disc" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -63,7 +70,8 @@
                 <td>
                   <div class="form-group">
                     <label>Categoria da disciplina</label>
-                    <select id="select_categoria" name="select_idcategoria" class="form-control select2bs4" style="width: 100%;">
+                    <select id="select_categoria" onchange="load_disciplinas($(this));" name="select_idcategoria"
+                      class="form-control select2bs4" style="width: 100%;">
                       <option value="-1" selected="selected">Selecione a categoria..</option>
                     </select>
                   </div>
@@ -81,6 +89,13 @@
 
                 </td>
               </tr>
+                        
+              <tr>  
+                <td class=" text-center">
+                        <a class="form-control btn btn-info" href="#">Salvar</a>
+                </td>
+
+              </tr>
             </table>
 
           </div>
@@ -88,10 +103,31 @@
 
             <table class="table table-striped">
               <tr>
-                <td>Disciplina 3</td>
-              </tr>
-              <tr>
-                <td>Disciplina 3</td>
+                <td>
+                  <!--- ============================================================= -->
+
+                  <table id="lista_disciplinas_insc" class="table table-striped table-bordered dt-responsive nowrap"
+                    style="width:100%" style="width:100%">
+                    <thead>
+                      <tr>
+                        <th>Disciplina</th>
+                        <th>Ano Cadastro</th>
+                        <th>Position</th>
+                         <th>operacao</th>
+                      </tr>
+                    </thead>
+                    <tbody id="lista_conteudo">
+                      <tr>
+                        <td >-</td>
+                        <td>-</td>
+                        <td>-</td>
+
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  <!--- ============================================================= -->
+                </td>
               </tr>
             </table>
 
@@ -108,7 +144,7 @@
           data-dismiss="modal">sel</button> -->
 
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-        <button type="button" class="btn btn-primary">Salvar</button>
+       <!-- <button type="button" class="btn btn-primary">Salvar</button> -->
       </div>
     </div>
   </div>
@@ -125,4 +161,25 @@
   </div>
   <!-- /.row -->
 </section>
-<script src="/js/pro_js/disciplinas_aluno.js"></script>
+
+<script type="text/javascript" src="/js/pro_js/disciplinas_aluno.js"></script>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script> 
+<!--
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script> -->
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.8/js/jquery.dataTables.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
+<!--
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js|https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>-->
+<scrip type="text/javascript"t src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.5/js/responsive.bootstrap4.min.js"></script>
+<script>
+
+  $(document).ready(function () {
+    $('#lista_disciplinas_insc').DataTable();
+  });
+
+
+</script>

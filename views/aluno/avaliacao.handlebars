@@ -1,0 +1,124 @@
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark">Sala de exame</h1>
+                <!-- <input type="hidden" id="idpessoa" name="idpessoa" value="{{user.key}}"></input> -->
+                <input type="hidden" id="idpessoa" name="idpessoa" value="1"></input>
+                <div id="dis"></div>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+<!-- Main content -->
+<section class="content">
+    <div class="card card-secondary">
+        <!--
+        <div class="card-header">
+            <h3 class="card-title">Bootstrap Switch</h3>
+        </div> -->
+        <div class="card-body">
+            <div class="row">
+
+                <div class="col-md-3" id="categoria">
+                    <div class="form-group">
+                        <label>Area</label>
+                    <select id="select_categoria" onchange="load_disciplinas($(this));" name="select_idcategoria"
+                      class="form-control select2bs4" style="width: 100%;">
+                      <option value="-1" selected="selected">Selecione a categoria..</option>
+                    </select>
+                    </div>
+                </div>
+                <div class="col-md-3" id="disciplina">
+                    <div class="form-group">
+                        <label>Disciplina</label>
+                    <select id="iddisciplinas" name="iddisciplinas" class="form-control select2bs4"
+                      style="width: 100%;">
+                      <option value="-1" selected="selected">Selecione a disciplina..</option>
+                    </select>
+                    </div>
+                </div>
+                <div class="col-md-2" id="btn_iniciar">
+                    <div class="form-group">
+                        <label>Criar exame</label>
+                        <button class="btn btn-secondary form-control" onclick="iniciar_avaliacao(1)">Iniciar</button>
+                    </div>
+                </div>
+
+                <div class="col-md-8 " id="btn_terminar" style="display:none;">
+                    <div class="form-group mt-4 ">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </li>
+                                <li class="page-item"><a class="page-link bg-primary" href="#">60</a></li>
+                                <li class="page-item"><a class="page-link" onclick="iniciar_avaliacao(0);"
+                                        href="#">Terminar</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-4 text-center bg-secondary">
+                    <div id="sessao" class="form-group" style="font-size: 40px;margin-top:10px">00:00:00</div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="card card-secondary" id='perguntas' nro="0" style="display:none">
+        <div class="card-body">
+            <p>
+                <strong>
+                    Um administrador de rede está projetando uma rede para a nova \ufffdlial de vinte e cinco
+                    usuários. Quais são as vantagens da utilização de um modelo
+                    cliente-servidor? (Escolha duas.)
+                </strong>
+            </p>
+            <p>
+                <input type="radio" class="toggle" name="toggle" value="1">Gerenciamento centralizado
+            </p>
+            <p>
+                <input type="radio" class="toggle" name="toggle" value="2"> Não requer software especializado
+            </p>
+
+
+            <p>
+                <input type="radio" class="toggle" name="toggle" value="3">E mais fácil de implementar segurança
+            </p>
+
+            <p>
+                <input type="radio" class="toggle" name="toggle" value="4"> Implementação de baixo custo
+            </p>
+
+
+
+
+            <br><br>
+
+
+        </div>
+    </div>
+</section>
+<script src="/js/pro_js/avaliacao.js"></script>

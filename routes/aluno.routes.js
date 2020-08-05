@@ -17,6 +17,10 @@ router.get('/pag_disciplinas',(req,res)=>{
    res.render("aluno/disciplinas");
   // atualizacao_aluno
 });
+router.get('/pag_avaliacao',(req,res)=>{
+   res.render("aluno/avaliacao");
+  // atualizacao_aluno
+});
 
 router.post('/atualizacao',(req,res)=>{
     //res.render("aluno/cadastro");
