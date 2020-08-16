@@ -1,4 +1,17 @@
-<!-- Content Header (Page header) -->
+<!-- mensagem de erro -->
+<div id="iderror" class="alert"
+  style="display:none;border-left: 5px solid #CD6155; margin-left:10px; background-color:#F9EBEA; color:#CD6155"
+  role="alert">
+</div>
+<div id="idsucesso" class="alert"
+  style="display:none;border-left: 5px solid #008000; margin-left:10px; background-color:#D8F6CE; color:#008000"
+  role="alert">
+  Inserido com sucesso..
+</div>
+<div id="divspiner" class="divspiner">
+  <!-- div usada para animacao de loading -->
+</div>
+<!-- final de mensagem de erro... -->
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
@@ -36,7 +49,7 @@
         <div class="card-body">
             <div class="row">
 
-                <div class="col-md-3" id="categoria">
+                <div class="col-md-2" id="categoria">
                     <div class="form-group">
                         <label>Area</label>
                         <select id="select_categoria" onchange="load_disciplinas($(this));" name="select_idcategoria"
@@ -45,19 +58,28 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md-3" id="disciplina">
+                <div class="col-md-2" id="disciplina">
                     <div class="form-group">
                         <label>Disciplina</label>
-                        <select id="iddisciplinas" name="iddisciplinas" class="form-control select2bs4"
+                        <select id="iddisciplinas" onchange="load_avaliacao($(this));"name="iddisciplinas" class="form-control select2bs4"
                             style="width: 100%;">
                             <option value="-1" selected="selected">Selecione a disciplina..</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2" id="idavaliacoes_">
+                    <div class="form-group">
+                        <label>Avaliacoes</label>
+                        <select id="idavaliacoes" name="idavaliacoes" class="form-control select2bs4"
+                            style="width: 100%;">
+                            <option value="-1" selected="selected">Selecione a avaliacao..</option>
                         </select>
                     </div>
                 </div>
                 <div class="col-md-2" id="btn_iniciar">
                     <div class="form-group">
                         <label>Criar exame</label>
-                        <button class="btn btn-secondary form-control" onclick="iniciar_avaliacao(1)">Iniciar</button>
+                        <button class="btn btn-secondary form-control" onclick="iniciar_avaliacao(1,1)">Iniciar</button>
                     </div>
                 </div>
 
@@ -79,7 +101,7 @@
                                 </li>
                                 <li class="page-item"><a id="pag_" class="page-link bg-primary" href="#">1 de </a></li>
                                 <li class="page-item"><a id="total_incice" class="page-link bg-primary" href="#">60</a></li>
-                                <li class="page-item"><a class="page-link" onclick="iniciar_avaliacao(0);"
+                                <li class="page-item"><a class="page-link" onclick="iniciar_avaliacao(0,0);"
                                         href="#">Terminar</a></li>
                             </ul>
                         </nav>
@@ -101,27 +123,9 @@
             <div id="">
                 <p>
                     <strong>
-                        Um administrador de rede está projetando uma rede para a nova \ufffdlial de vinte e cinco
-                        usuários. Quais são as vantagens da utilização de um modelo
-                        cliente-servidor? (Escolha duas.)
+                            Nao localizamos perguntas no exame selecionado
                     </strong>
                 </p>
-                <p>
-                    <input type="radio" class="toggle" name="toggle" value="1">Gerenciamento centralizado
-                </p>
-                <p>
-                    <input type="radio" class="toggle" name="toggle" value="2"> Não requer software especializado
-                </p>
-
-
-                <p>
-                    <input type="radio" class="toggle" name="toggle" value="3">E mais fácil de implementar segurança
-                </p>
-
-                <p>
-                    <input type="radio" class="toggle" name="toggle" value="4"> Implementação de baixo custo
-                </p>
-
             </div>
 
         </div>

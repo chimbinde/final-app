@@ -1,0 +1,119 @@
+<!-- Content Header (Page header) -->
+
+
+<div id="iderror" class="alert"
+    style="display:none;border-left: 5px solid #CD6155; margin-left:10px; background-color:#F9EBEA; color:#CD6155"
+    role="alert">
+    Não foi possivel carregar página, falha de conexão..
+</div>
+<div id="divspiner" class="divspiner">
+    <!-- div usada para animacao de loading -->
+</div>
+<div id="sucesso_box"  class="alert">
+    <!-- div usada para animacao de loading --> 
+</div>
+<div class="content-header" id="divcontainer2" style="display:block;">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark">Meus exames </h1>
+                <!-- <input type="hidden" id="idpessoa_" name="idpessoa_" value="{{user.key}}"></input> -->
+                <input type="hidden" id="idpessoa" name="idpessoa" value="2"></input>
+                <input type="hidden" id="total_numeros" name="total_numeros" value="0"></input>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/" style="color:#6A5ACD;">Inicio</a></li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<!-- Main content -->
+<section class="content" id="divcontainer" style="display:block;">
+
+    <div class="container-fluid">
+        <div id="card_row" class="card">
+            <div class="card-body" style="width:100%;">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <!--<label>Avaliacoes</label> -->
+                            <select id="iddisciplinas" onchange="load_avaliacao($(this));" name="iddisciplinas"
+                                class="form-control select2bs4" style="width: 100%;">
+                                <option value="-1" selected="selected">Selecione a Disciplina</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <!--<label>Avaliacoes</label> -->
+                            <select id="idavaliacoes"  name="idavaliacoes" class="form-control select2bs4"
+                                style="width: 100%;">
+                                <option value="-1" idd="-1" idava="-1" selected="selected">Nova Avaliacao</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <button class="btn btn-secondary form-control"
+                                onclick="operacao_enviada($(this));">Criar/editar</button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <div id="card_edit" class="card" style="display: none;">
+            <div class="card-body" style="width:100%;">
+                <table id="tblRespostas" class="table table-striped">
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                <label for="email">Codigo</label>
+                                <input type="text" class="form-control" disabled name="txtCodigo" id="txtCodigo"
+                                    placeholder="Codigo">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Descricao</label>
+                                <input type="text" class="form-control" name="txtDescricao" id="txtDescricao"
+                                    placeholder="Descricao">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                <button onclick="salvar_dados();" class="form-control bg-info"> salvar
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div id="card_lista" class="card">
+            <div class="card-body" style="width:100%;">
+                <table id="tblavaliacoes" class="table table-striped">
+                    <tr id="linha_pesquisa" >
+                        <td class="text-center">
+
+                            <form class="form-inline">
+                            <i class="fas fa-search" aria-hidden="true"></i>
+                            <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search"
+                                aria-label="Search">
+                            </form>
+                            <!-- Search form -->
+                            <!-- <input class="form-control col-sm-4" type="text" placeholder="Pesquisar" aria-label="pesquisar">-->
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+</section>
+
+<script src="/js/pro_js/meus_exames.js"></script>

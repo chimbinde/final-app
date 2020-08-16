@@ -21,7 +21,11 @@ router.get('/pag_avaliacao',(req,res)=>{
    res.render("aluno/avaliacao");
   // atualizacao_aluno
 });
-
+router.get('/resumo_avaliacao',(req,res)=>{
+   res.render("aluno/resumo_avaliacao");
+  // atualizacao_aluno
+});
+///aluno/resumo-avaliacao
 router.post('/atualizacao',(req,res)=>{
     //res.render("aluno/cadastro");
    // atualizacao_aluno

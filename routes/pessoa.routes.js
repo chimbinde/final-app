@@ -5,6 +5,7 @@ var dados = require('./../model/Usuario');
 //==========================
 const bcrypt = require("bcryptjs");
 const {eAdmin} = require("../helpers/eAdmin");
+const {is_pessoa} = require("../helpers/is_pessoa");
 
 const passport = require("passport");
 
@@ -33,7 +34,7 @@ router.get('/login',(req,res)=>{
     res.render("pessoa/login");
 });
 //router.get('/info',eAdmin,(req,res)=>{
-router.get('/info',eAdmin,(req,res)=>{
+router.get('/info',is_pessoa,(req,res)=>{
     res.render("pessoa/info");
 });
 router.get('/logout',(req,res)=>{

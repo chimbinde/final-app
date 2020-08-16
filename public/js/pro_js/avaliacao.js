@@ -11,7 +11,8 @@ window.onload = () => {
     //3 se sim load execucao de este
     //4. inscrever  testes
     // startCountdown();
-    listar_avaliacao_aberta();
+    let novo = 0;
+    listar_avaliacao_aberta(novo);
 
 }
 
@@ -22,23 +23,52 @@ function marcar_resposta(opcao) {
    */
     resposta = opcao.val();
     questoes_id = opcao.attr('ord');
+    iddisciplinas = opcao.attr('iddis');
+    iddocente = opcao.attr('iddocente');
+    idavaliacao = opcao.attr('qid');
+
+
     idpessoa = $('#idpessoa').val();
-    idavaliacao = $('#idavalia').val();
+    idavaliacao1 = $('#idavalia').val();
     vezes = $('#vezes').val();
     iddisc = $('#iddisc').val();
     //testar tempo_
-    
+    //==========================================================================
+    //"ava_iddisciplinas/:ava_iddocente/:ava_id/:vezes/:idpessoa"
+    url = urlBase + 'alunoavaliacao/tempo/' + iddisciplinas + '/' + iddocente + '/' + idavaliacao + '/' + vezes + '/' +idpessoa;
+   // alert(url);
+    $.ajax({
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        url: url,
+        contentType: "application/json",
+        dataType: 'json',
+        success: function (data) {
+            html = '';
+            var j = 0;
 
-   // verificar_resposta(iddisc, idpessoa, idavaliacao, vezes, questoes_id,resposta);
-    //eliminar e adicionar novo ...
-    eliminar_resposta(iddisc, idpessoa, idavaliacao, vezes, questoes_id,resposta);
-    //adicionar questao
-   // adicionar_resposta(iddisc, idpessoa, idavaliacao, vezes, questoes_id,resposta) ;
-    
+            if((data[0].minutos>=0 )& (data[0].minutos <=120)){
+                eliminar_resposta(iddisciplinas, iddocente ,questoes_id , vezes,idpessoa,resposta, idavaliacao);
+                console.log("gravou.."+data[0].minutos);
+
+
+                tempo = (120-data[0].minutos)*60;
+                /*
+                startCountdown();*/
+
+            }else {
+                console.log("fechou teste.."+data[0].minutos);
+                fechar_sessao();
+            }
+           
+        }
+       
+    });
+   // console.log("Eureca 2..");
+    //===================================================================================================
+    // eliminar_resposta(iddisciplinas, iddocente ,questoes_id , vezes,idpessoa,resposta, idavaliacao);
 }
-function verificar_resposta(iddisc, idpessoa, idavaliacao, vezes, questoes_id,resposta)
-{
-    url = urlBase + 'respostas/findquestao/'+iddisc+'/'+idpessoa+'/'+idavaliacao+'/'+vezes+'/'+questoes_id;
+function verificar_resposta(iddisc, idpessoa, idavaliacao, vezes, questoes_id, resposta) {
+    url = urlBase + 'respostas/findquestao/' + iddisc + '/' + idpessoa + '/' + idavaliacao + '/' + vezes + '/' + questoes_id;
     $.ajax({
         headers: { "Content-Type": "application/json", "Accept": "application/json" },
         url: url,
@@ -46,21 +76,26 @@ function verificar_resposta(iddisc, idpessoa, idavaliacao, vezes, questoes_id,re
         dataType: 'json',
         success: function (data) {
             var j = 0;
-            eliminar_resposta(iddisc, idpessoa, idavaliacao, vezes, questoes_id,resposta);
+            eliminar_resposta(iddisc, idpessoa, idavaliacao, vezes, questoes_id, resposta);
 
         },
-        error: function(e){
-            adicionar_resposta(iddisc, idpessoa, idavaliacao, vezes, questoes_id,resposta) ;
+        error: function (e) {
+            adicionar_resposta(iddisc, idpessoa, idavaliacao, vezes, questoes_id, resposta);
             console.log("error");
         }
     });
 }
-function adicionar_resposta(iddisciplinas, idpessoa, avaliacao_id, vezes, questoes_id, alternativa) {
-    url = urlBase + 'respostas/'
+function adicionar_resposta(iddisciplinas, iddocente, questoes_id, vezes, idpessoa, alternativa, idavaliacao) {
+    // iddisciplinas, iddocente, questoes_id, vezes,idpessoa,alternativa,idavaliacao
+    url = urlBase + 'respostas/';
+    // alert(iddisciplinas+'-'+ iddocente+'-'+ idavaliacao+'-'+ questoes_id+'-'+ vezes+'-'+idpessoa+'-'+alternativa);
     let dados = {
-        iddisciplinas: iddisciplinas, idpessoa: idpessoa, avaliacao_id: avaliacao_id,
-        vezes: vezes, questoes_id: questoes_id, alternativa: alternativa
+        iddisciplinas: iddisciplinas, iddocente: iddocente, questoes_id: questoes_id,
+        vezes: vezes, idpessoa: idpessoa, alternativa: alternativa, idavaliacao: idavaliacao
     }
+
+    //console.log(dados);
+    //return;
     $.ajax({
         type: 'POST',
         url: url,
@@ -78,11 +113,13 @@ function adicionar_resposta(iddisciplinas, idpessoa, avaliacao_id, vezes, questo
 
 }
 
-function eliminar_resposta(iddisc, idpessoa, idavaliacao, vezes, questoes_id, alternativa) {
+function eliminar_resposta(iddisciplinas, iddocente, questoes_id, vezes, idpessoa, alternativa, idavaliacao) {
 
-    url = urlBase + 'respostas/' + iddisc + '/' + idpessoa + '/' + idavaliacao + '/' + vezes + '/' + questoes_id;
-    // alert(url);
+    //(iddisciplinas, iddocente ,questoes_id , vezes,idpessoa,resposta);
 
+    url = urlBase + 'respostas/' + iddisciplinas + '/' + iddocente + '/' + idavaliacao + '/' + questoes_id + '/' + vezes + '/' + idpessoa;
+    //alert(url);
+    //return ;
     // data: JSON.stringify(dados), // access in body
     $.ajax({
         type: 'DELETE',
@@ -90,23 +127,23 @@ function eliminar_resposta(iddisc, idpessoa, idavaliacao, vezes, questoes_id, al
         contentType: 'application/json'
     }).done(function () {
         // alert("Inserido com sucesso..");
-        
+
         console.log('SUCCESS');
         // window.location.replace("/");
     }).fail(function (msg) {
-        
+
         console.log('FAIL');
     }).always(function (msg) {
-        adicionar_resposta(iddisc, idpessoa, idavaliacao, vezes, questoes_id,  alternativa);
+        //iddisciplinas,iddocente, questoes_id, vezes, idpessoa, alternativa,idavaliacao
+        adicionar_resposta(iddisciplinas, iddocente, questoes_id, vezes, idpessoa, alternativa, idavaliacao);
         console.log('ALWAYS');
     });
 
 }
-function listar_avaliacao_aberta() {
+function listar_avaliacao_aberta(novo) {
     let id = $("#idpessoa").val();
     url = urlBase + 'alunoavaliacao/' + id;
-    // alert(url);
-    //return;
+
     $.ajax({
         headers: { "Content-Type": "application/json", "Accept": "application/json" },
         url: url,
@@ -123,29 +160,28 @@ function listar_avaliacao_aberta() {
                     exame = item;
                 }
             });
-            var dinicio = new Date(exame.inicio);
-            console.log(dinicio);
-            // console.log("-------->");
             var horaAtual = new Date();
-            console.log(exame);
-            $("#idavalia").val(exame.avaliacao_id);
-            $("#vezes").val(exame.vezes);
-            $("#iddisc").val(exame.iddisciplinas);
 
-            carregar_teste(exame.iddisciplinas, exame.idpessoa, exame.avaliacao_id);
-            incializar_questoes(exame.iddisciplinas, exame.idpessoa, exame.avaliacao_id);
-            //  console.log(exame.iddisciplinas+'-'+exame.idpessoa+'-'+exame.avaliacao_id);
-            tempo = 10;
-            startCountdown();
+            if (j == 1) {
+                // console.log(exame);
+                $("#idavalia").val(exame.avaliacao_id);
+                $("#vezes").val(exame.vezes);
+                $("#iddisc").val(exame.iddisciplinas);
+
+                carregar_questoes_avaliacao(exame, novo);
+                incializar_questoes(exame, id);
+
+                tempo = 60*60*2;
+                startCountdown();
+            }
         }
     });
 
     return '0'; s
 }
-function incializar_questoes(iddisc, idpessoa, idaval) {
-    //buscar respostas respondidas pelo estudante...
-    // /respostas/avaliacao/:iddisc/:idpessoa/:idavaliacao/:vezes
-    url = urlBase + 'respostas/avaliacao/' + iddisc + '/' + idpessoa + '/' + idaval + '/1';
+function incializar_questoes(exame, idestudante) {
+    url = urlBase + 'respostas/avaliacao/' + exame.avaliacao_id + '/' + exame.avaliacao_idpessoa + '/' + exame.avaliacao_iddisciplinas + '/' + exame.vezes + '/' + idestudante;
+    //alert(url);
     $.ajax({
         headers: { "Content-Type": "application/json", "Accept": "application/json" },
         url: url,
@@ -157,33 +193,37 @@ function incializar_questoes(iddisc, idpessoa, idaval) {
 
             $.each(data, function (i, item) {
                 j = 1;
+
                 if (item.alternativa == $("#p" + item.questoes_id).find("[id=1]").val()) {
                     $("#p" + item.questoes_id).find("[id=1]").prop("checked", true);
-                    //console.log("1");
+                    console.log("1");
                 }
                 if (item.alternativa == $("#p" + item.questoes_id).find("[id=2]").val()) {
                     $("#p" + item.questoes_id).find("[id=2]").prop("checked", true);
-                    //console.log("2");
+                    console.log("2");
                 }
                 if (item.alternativa == $("#p" + item.questoes_id).find("[id=3]").val()) {
                     $("#p" + item.questoes_id).find("[id=3]").prop("checked", true);
-                    // console.log("3");
+                    console.log("3");
                 }
                 if (item.alternativa == $("#p" + item.questoes_id).find("[id=4]").val()) {
                     $("#p" + item.questoes_id).find("[id=4]").prop("checked", true);
-                    // console.log("4");
+                    console.log("4");
                 }
-                console.log(">>>");
+                console.log("*>>>");
+                console.log(item.alternativa);
             });
         }
     });
 }
-function carregar_teste(iddisc, idpessoa, idaval) {
+function carregar_questoes_avaliacao(exame, novo) {
     //bucar questoes do teste
-    url = urlBase + 'questoes/avaliacao/' + idaval;
+    url = urlBase + 'questoes/avaliacao/' + exame.avaliacao_id + '/' + exame.avaliacao_idpessoa + '/' + exame.avaliacao_iddisciplinas;
+    // alert(url);
 
     $("#perguntas").css({ display: "block" });
-    iniciar_avaliacao(1);
+
+    iniciar_avaliacao(1, novo);
 
     //console.log("loadind.."+iddisc+'-'+ idpessoa+'-'+ idaval);
     $.ajax({
@@ -201,22 +241,18 @@ function carregar_teste(iddisc, idpessoa, idaval) {
             $.each(data, function (i, item) {
                 if (j == 0) block = ' style="display:block" '; else block = ' style="display:none" ';
                 j = 1;
-                //  console.log(block);
+
                 html += '<div ord="' + item.idordem + '" id="p' + item.idordem + '" ' + block + '>';
                 html += '<p><strong>[' + item.idordem + ']' + item.pergunta + '</strong></p>';
 
-                html += '<p><input type="radio" ord="' + item.idordem + '" onclick="marcar_resposta($(this));" class="toggle" id="1" name="' + item.idordem + '" value="' + item.alternativa1 + '">' + item.alternativa1 + '</input></p>';
-                html += '<p><input type="radio" ord="' + item.idordem + '" onclick="marcar_resposta($(this));" class="toggle" id="2" name="' + item.idordem + '" value="' + item.alternativa2 + '">' + item.alternativa2 + '</input></p>';
-                html += '<p><input type="radio" ord="' + item.idordem + '" onclick="marcar_resposta($(this));" class="toggle" id="3" name="' + item.idordem + '" value="' + item.alternativa3 + '">' + item.alternativa3 + '</input></p>';
-                html += '<p><input type="radio" ord="' + item.idordem + '" onclick="marcar_resposta($(this));" class="toggle" id="4" name="' + item.idordem + '" value="' + item.alternativa4 + '">' + item.alternativa4 + '</input></p>';
-                //  html +='<p><img src="/img/img7.jpg" class="img-fluid" alt="Responsive image"></p>';
+                html += '<p><input type="radio" qid="' + item.avaliacao_id + '"  iddocente="' + item.avaliacao_idpessoa + '" iddis="' + item.avaliacao_iddisciplinas + '" ord="' + item.idordem + '" onclick="marcar_resposta($(this));" class="toggle" id="1" name="' + item.idordem + '" value="' + item.alternativa1 + '">' + item.alternativa1 + '</input></p>';
+                html += '<p><input type="radio" qid="' + item.avaliacao_id + '" iddocente="' + item.avaliacao_idpessoa + '" iddis="' + item.avaliacao_iddisciplinas + '" ord="' + item.idordem + '" onclick="marcar_resposta($(this));" class="toggle" id="2" name="' + item.idordem + '" value="' + item.alternativa2 + '">' + item.alternativa2 + '</input></p>';
+                html += '<p><input type="radio" qid="' + item.avaliacao_id + '" iddocente="' + item.avaliacao_idpessoa + '" iddis="' + item.avaliacao_iddisciplinas + '" ord="' + item.idordem + '" onclick="marcar_resposta($(this));" class="toggle" id="3" name="' + item.idordem + '" value="' + item.alternativa3 + '">' + item.alternativa3 + '</input></p>';
+                html += '<p><input type="radio" qid="' + item.avaliacao_id + '"iddocente="' + item.avaliacao_idpessoa + '" iddis="' + item.avaliacao_iddisciplinas + '" ord="' + item.idordem + '" onclick="marcar_resposta($(this));" class="toggle" id="4" name="' + item.idordem + '" value="' + item.alternativa4 + '">' + item.alternativa4 + '</input></p>';
                 html += '</div>';
-
                 i++;
-
             });
-
-
+            // console.log(data);
             $("#card-perguntas").html(html);
         }
     });
@@ -251,27 +287,90 @@ function prox(op) {
 
     $("#p" + currente + "").css({ display: "block" });
     $("#current").val(currente);
-    $("#pag_").html(currente+" de ");
+    $("#pag_").html(currente + " de ");
     //alert("rrrr");
 
     // $("#p2").css({display:"block;"});
     // $("#p2"+currente).css({display:"block;"});
 
 }
-function iniciar_avaliacao(op) {
+
+function load_avaliacao(select) {
+
+    let idpessoa = $("#idpessoa").val();
+    let iddisc = $("#iddisciplinas").val();
+
+    //alert(idpessoa+"@"+iddisciplina);
+    url = urlBase + 'avaliacao/disc/' + iddisc;
+    $.ajax({
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        url: url,
+        contentType: "application/json",
+        dataType: 'json',
+        success: function (data) {
+            html = '';
+            var j = 0;
+            console.log(data);
+            $.each(data, function (i, item) {
+                html += '<option id="idoption" iddisc="' + item.iddisciplinas + '" iddocente="' + item.idpessoa + '" value="' + item.id + '"  >' + item.descricao + '</option>';
+                j = 1;
+            });
+
+            if (j == 1) $("#idavaliacoes").html(html);
+            else $("#idavaliacoes").html("<option id='idoption' value='-1'>Selecione avaliacao</option>");
+        }
+    });
+
+}
+function iniciar_avaliacao(op, novo) {
     let opcao = "";
     let opcao_ = "";
     if (op === 1) {
         opcao = " none ";
         opcao_ = " block ";
+        //criar uma avaliacao____
+        //alert("id>>"+ $("#iddisciplinas").val()+'*'+$("#idpessoa").val());
+
+        if (novo == 1) {
+
+            if (($("#iddisciplinas").val() == -1) | ($("#idavaliacoes").val() == -1)) {
+                //alert("deve selecionar a disciplina");        
+                $("#iderror").html("Deve selecionar uma disciplina");
+                $("#iderror").css({ display: "block" });
+                return;
+            } else {
+                //.find("[id=idoption]")
+                let avaliacao = $("#idavaliacoes").find("[id=idoption]");
+
+                // console.log(avaliacao.html());
+                let iddisciplinas = avaliacao.attr("iddisc");
+                let iddocente = avaliacao.attr("iddocente");
+                let avaliacao_id = avaliacao.val()
+                let idaluno = $("#idpessoa").val();
+
+
+                //console.log("@");
+                //  console.log(iddisciplinas+'-'+iddocente+'-'+avaliacao_id+'-'+idaluno);
+                //  return;
+                criar_avaliacao(iddisciplinas, avaliacao_id, iddocente, idaluno);
+
+            }
+        }
+
     } else {
+        //encerrar uma avaliacao____
+        tempo=0;
+        fechar_sessao();
         opcao = " block ";
         opcao_ = " none ";
     }
+
+    // alert("iniciar avaliacao...");
     //esconde
     $("#categoria").css({ display: opcao });
     $("#disciplina").css({ display: opcao });
     $("#btn_iniciar").css({ display: opcao });
+    $("#idavaliacoes_").css({ display: opcao });
 
     $("#btn_terminar").css({ display: opcao_ });
     $("#btn_terminar").css({ display: opcao_ });
@@ -279,6 +378,35 @@ function iniciar_avaliacao(op) {
 
 
 
+}
+function criar_avaliacao(iddisc, idavalia, iddocente, idaluno) {
+    //(iddisciplinas+'-'+iddocente+'-'+avaliacao_id+'-'+idaluno)
+    var url = urlBase + 'alunoavaliacao';
+    //  alert(iddisc+"-"+idavalia+"-"+idpessoa);
+    let dados = {
+        idpessoa: idaluno, iddisciplinas: iddisc, nota: "0", avaliacao_id: idavalia, id: idavalia, avaliacao_idpessoa: iddocente, avaliacao_iddisciplinas: iddisc, vezes: '0', inicio: '0',
+        fim: '', fechada: "0"
+    }
+    // console.log(dados);
+    // console.log("@@@");
+    $.ajax({
+        type: 'POST',
+        url: url,
+        contentType: 'application/json',
+        data: JSON.stringify(dados), // access in body
+    }).done(function (data) {
+        let novo = 1;
+        //  listar_avaliacao_aberta(novo);
+        //aluno/pag_avaliacao
+        // window.location.replace("http://stackoverflow.com");
+        // similar behavior as clicking on a link
+        window.location.href = "/aluno/pag_avaliacao";
+        console.log('SUCCESS' + data);
+    }).fail(function (msg) {
+        console.log('FAIL');
+    }).always(function (msg) {
+        console.log('ALWAYS');
+    });
 }
 //=================================================================
 function startCountdown() {
@@ -297,16 +425,24 @@ function startCountdown() {
             seg = "0" + seg;
 
         }
-        if (seg == 10) alert("Restam apenas 10 segundos");
+        // if (seg == 10) alert("Restam apenas 10 segundos");
         horaImprimivel = '00:' + min + ':' + seg;
+        //ajuste no cess
+        if(tempo<=300){
+            if(tempo%2==0) $("#sessao").css({color:"#c40233"}); 
+            else
+            $("#sessao").css({color:"#ff6961"});
+        }           
+        else $("#sessao").css({color:"white"});
+
         $("#sessao").html(horaImprimivel);
         setTimeout('startCountdown()', 1000);
         tempo--;
     } else {
         //  window.open('../controllers/logout.php', '_self');
 
-        //  fechar_sessao();
-        alert("final de tudo..");
+        fechar_sessao();
+      //  alert("final de tudo..");
         return;
     }
 }
@@ -364,24 +500,6 @@ function disciplina_inscrita(disc, valor) {
     // disc = $(".disc");
     var j = 0;
 
-
-
-    // console.log(x);
-
-
-
-    //console.log("***" + disc);
-    return j;
-    for (i = 0; i < fLen; i++) {
-        console.log(disc[i] + "-" + valor);
-        if (valor === disc[i]) j = 1;
-    }
-    /*
-        $.each(disc, function (i, item) {
-            console.log(item+"-"+valor);
-            if (valor === item) j = 1;
-    
-        }); */
     return j;
 }
 
@@ -389,12 +507,11 @@ function disciplina_inscrita(disc, valor) {
 function load_disciplinas(select) {
 
     let id = $("#idpessoa").val();
+    $("#idavaliacoes").html("<option value='-1' >selecione avaliacao</option>");
     lista = load_disciplinas_aluno(id);
-
     //  console.log(lista);
     let area = select.val();
     url = urlBase + 'disciplinas/area/' + area;
-
     return;
 
 }
