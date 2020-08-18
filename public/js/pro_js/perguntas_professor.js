@@ -59,7 +59,7 @@ function tbl_avaliacoes() {
       var j = 0;
       var exame;
       let tbl = '<tr id="linha_pesquisa" >' + $("#linha_pesquisa").html() + '</tr>';
-      console.log(tbl);
+     // console.log(tbl);
       $.each(data, function (i, item) {
         i++;
         html += '<tr id="' + item.id + '" idp="' + item.idpessoa + '" iddisc="' + item.iddisciplinas + '"><td><div class="row"><div class="col-sm-10">' + item.descricao + '<strong>[' + item.nomedisc + ']</strong></div>';
@@ -76,6 +76,7 @@ function tbl_avaliacoes() {
 
 function carregar_questoes(select){
  // var select = $('#idavaliacoes').find("option:selected");
+
    let sel= select.find("option:selected");
    let avaliacao_id= sel.attr("idava");
    let iddisciplina=sel.attr("idd");
@@ -87,9 +88,12 @@ function carregar_questoes(select){
 }
 
 function carregar_questoes_avaliacao(avaliacao_id, iddoc, iddisciplina, fechado, vezes, idaluno) {
+  area_tematica(iddisciplina);
 
+//alert(iddisciplina);
+  //return;
   url = urlBase + 'questoes/avaliacao/' + avaliacao_id + '/' + iddoc + '/' + iddisciplina;
-
+ // let aux=$("#aux").html();
   $.ajax({
       headers: { "Content-Type": "application/json", "Accept": "application/json" },
       url: url,
@@ -103,6 +107,7 @@ function carregar_questoes_avaliacao(avaliacao_id, iddoc, iddisciplina, fechado,
               if(primeiro==1) val=' collapse '; else  val=' collapse show ';
               j = 1;
               primeiro=1;
+              // //find("option:selected")
               html +=`<div class="card">
                       <div class="card-header" id="heading`+item.id+`">
                           <h5 class="mb-0">
@@ -123,28 +128,34 @@ function carregar_questoes_avaliacao(avaliacao_id, iddoc, iddisciplina, fechado,
                                 <td>
                                   <div class="form-group">
                                     <label for="comment"> Pergunta</label>
-                                    <textarea class="form-control" rows="3" id="comment">`+item.pergunta+`</textarea>
+                                    <textarea class="form-control" rows="3" id="pergunta">`+item.pergunta+`</textarea>
                                   </div>
                                   <div class="form-group">
                                     <label for="comment"> Resposta:</label>
-                                    <textarea class="form-control" rows="1" id="comment">`+item.resposta+`</textarea>
+                                    <textarea class="form-control" rows="1" id="resposta">`+item.resposta+`</textarea>
                                   </div> 
                                   <div class="form-group">
                                     <label for="comment"> Opcao 1</label>
-                                    <textarea class="form-control" rows="1" id="comment">`+item.alternativa1+`</textarea>
+                                    <textarea class="form-control" rows="1" id="alternativa1">`+item.alternativa1+`</textarea>
                                   </div>
                                   <div class="form-group">
                                     <label for="comment">Opcao 2:</label>
-                                    <textarea class="form-control" rows="1" id="comment">`+item.alternativa2+`</textarea>
+                                    <textarea class="form-control" rows="1" id="alternativa2">`+item.alternativa2+`</textarea>
                                   </div>                                  
                                   <div class="form-group">
                                     <label for="comment"> Opcao 3:</label>
-                                    <textarea class="form-control" rows="1" id="comment">`+item.alternativa3+`</textarea>
+                                    <textarea class="form-control" rows="1" id="alternativa3">`+item.alternativa3+`</textarea>
                                   </div>
                                   <div class="form-group">
                                     <label for="comment">Opcao 4:</label>
-                                    <textarea class="form-control" rows="1" id="comment">`+item.alternativa4+`</textarea>
+                                    <textarea class="form-control" rows="1" id="alternativa4">`+item.alternativa4+`</textarea>
                                   </div>
+                                  <div class="form-group" >
+                                      <select idarea="`+item.id+`" class="form-control areatematica area`+item.id+`" id="areatematica_`+item.idareatematica+`" ><option value="-1" id="option0">Selecione area tematica..</option>;   
+                                     `+ $("#aux").html()+`
+                                      </select>
+                                  </div>
+
 
                               </td>
                             </tr>
@@ -184,35 +195,40 @@ function carregar_questoes_avaliacao(avaliacao_id, iddoc, iddisciplina, fechado,
                     <td>
                       <div class="form-group">
                         <label for="comment"> Pergunta</label>
-                        <textarea class="form-control" rows="3" id="comment"></textarea>
+                        <textarea class="form-control" rows="3" id="pergunta"></textarea>
                       </div>
                       <div class="form-group">
                         <label for="comment"> Resposta:</label>
-                        <textarea class="form-control" rows="1" id="comment"></textarea>
+                        <textarea class="form-control" rows="1" id="resposta"></textarea>
                       </div> 
                       <div class="form-group">
                         <label for="comment"> Opcao 1</label>
-                        <textarea class="form-control" rows="1" id="comment"></textarea>
+                        <textarea class="form-control" rows="1" id="alternativa1"></textarea>
                       </div>
                       <div class="form-group">
                         <label for="comment">Opcao 2:</label>
-                        <textarea class="form-control" rows="1" id="comment"></textarea>
+                        <textarea class="form-control" rows="1" id="alternativa2"></textarea>
                       </div>                                  
                       <div class="form-group">
                         <label for="comment"> Opcao 3:</label>
-                        <textarea class="form-control" rows="1" id="comment"></textarea>
+                        <textarea class="form-control" rows="1" id="alternativa3"></textarea>
                       </div>
                       <div class="form-group">
                         <label for="comment">Opcao 4:</label>
-                        <textarea class="form-control" rows="1" id="comment"></textarea>
+                        <textarea class="form-control" rows="1" id="alternativa4"></textarea>
                       </div>
+                      <div class="form-group" >
+                      <select idarea="`+id+`" class="form-control areatematica area`+id+`" id="areatematica_`+id+`" ><option value="-1" id="option0">Selecione area tematica..</option>;   
+                     `+ $("#aux").html()+`
+                      </select>
+                  </div>
 
                   </td>
                 </tr>
                 <tr>
                 <td>
                     <div class="form-group">
-                    <button class="btn form-control btn-info" rows="1" id="comment">salvar</button>
+                    <button onclick="nova_perqgunta($(this));" class="btn form-control btn-info" rows="1" id="comment">salvar</button>
                   </div>
                 </td>
                 </tr>
@@ -222,19 +238,136 @@ function carregar_questoes_avaliacao(avaliacao_id, iddoc, iddisciplina, fechado,
           </div>
       </div>`;
           $("#accordionExample").html(html);
+          marcar_id_area();
       }
   });
 
 }
+function  marcar_id_area(){
 
-function editar_pergunta(botao){
+  //$("#aux").find("#areatematica");
+  $(".areatematica").each( function (i, item) {
+    i++;
+    //   console.log(`select${i}:${this.value}`);
+  //  console.log(this.id.replace('areatematica_','')+'-'+ this.value);
+    this.value=this.id.replace('areatematica_','');
+   // $(".areatematica").ind
+  });
+}
+function nova_perqgunta(botao){
+  let tabela= botao.parent().parent().parent().parent().parent();
+  let iddisc = tabela.attr("iddisc");
+  let avaliacao_id = tabela.attr("avaliacao_id");
+  let idpessoa = tabela.attr("idpessoa");
+  let id = tabela.attr("id");
+  let pergunta = tabela.find("#pergunta").val();
+  let resposta = tabela.find("#resposta").val();
+  let alternativa1 =tabela.find("#alternativa1").val();
+  let alternativa2 =tabela.find("#alternativa2").val();
+  let alternativa3 =tabela.find("#alternativa3").val();
+  let alternativa4 =tabela.find("#alternativa4").val();
 
-  let tabela= botao.parent().parent().parent().parent();
+  let idareatematica =$(".area"+id+"").val();
+  url = urlBase + 'questoes';
+  let dados = {
+      iddisciplina: iddisc, idpessoa: idpessoa, pergunta: pergunta,id:id,avaliacao_id:avaliacao_id,
+      resposta: resposta, alternativa1: alternativa1, alternativa2: alternativa2, 
+      alternativa3: alternativa3,alternativa4: alternativa4, idareatematica:idareatematica
+  } 
 
-  console.log(tabela);
+  //console.log(dados);
+  //return;
+
+  $.ajax({
+      type: 'POST',
+      url: url,
+      contentType: 'application/json',
+      data: JSON.stringify(dados), // access in body
+  }).done(function () {
+      console.log('SUCCESS');
+      //  window.location.replace("/pessoa/loginpage");
+  }).fail(function (msg) {
+      console.log('FAIL');
+  }).always(function (msg) {
+      console.log('ALWAYS');
+  }); 
+
+  //console.log(tabela.find("#pergunta").html()+'>>>');
+ // alert(tabela.find("#pergunta").val()+'>>>');
+ // console.log(tabela.find("#pergunta").text()+'>>>');
+
+  //let idareatematica =$(".area"+id+"").val();
+
+  ////:questoesId/:idpessoa/:iddisciplina/:avaliacao_id"
+  //alert(alternativa1+'>>'+idareatematica+'>>');
+
+  //return;
 
 }
-function eliminar_avaliacao(botao) {
+function area_tematica(iddisc){
+
+  url = urlBase + 'areatematica/'+iddisc;
+
+  $.ajax({
+    headers: { "Content-Type": "application/json", "Accept": "application/json" },
+    url: url,
+    contentType: "application/json",
+    dataType: 'json',
+    success: function (data) {
+      html ='';
+
+      var j = 0;
+      $.each(data, function (i, item) {
+        i++;
+        html+='<option value="'+item.idareatematica+'" id="option'+item.idareatematica+'">'+item.areatematica+'</option>';
+      });
+
+      $("#aux").html(html);
+   
+    }
+  });
+
+
+}
+function editar_pergunta(botao){
+
+  let tabela= botao.parent().parent().parent().parent().parent();
+  let iddisc = tabela.attr("iddisc");
+  let avaliacao_id = tabela.attr("avaliacao_id");
+  let idpessoa = tabela.attr("idpessoa");
+  let id = tabela.attr("id");
+  let pergunta = tabela.find("#pergunta").val();
+  let resposta = tabela.find("#resposta").val();
+  let alternativa1 =tabela.find("#alternativa1").val();
+  let alternativa2 =tabela.find("#alternativa2").val();
+  let alternativa3 =tabela.find("#alternativa3").val();
+  let alternativa4 =tabela.find("#alternativa4").val();
+
+  let idareatematica =$(".area"+id+"").val();
+
+  url = urlBase + 'questoes/' + id + '/' + idpessoa + '/' + iddisc+'/'+avaliacao_id;
+  // alert(iddisciplinas+'-'+ iddocente+'-'+ idavaliacao+'-'+ questoes_id+'-'+ vezes+'-'+idpessoa+'-'+alternativa);
+  let dados = {
+      iddisciplinas: iddisc, idpessoa: idpessoa, pergunta: pergunta,
+      resposta: resposta, alternativa1: alternativa1, alternativa2: alternativa2, 
+      alternativa3: alternativa3,alternativa4: alternativa4, idareatematica:idareatematica
+  } 
+  $.ajax({
+      type: 'PUT',
+      url: url,
+      contentType: 'application/json',
+      data: JSON.stringify(dados), // access in body
+  }).done(function () {
+      //alert("Inserido com sucesso..");
+      console.log('SUCCESS');
+      //  window.location.replace("/pessoa/loginpage");
+  }).fail(function (msg) {
+      console.log('FAIL');
+  }).always(function (msg) {
+      console.log('ALWAYS');
+  }); 
+}
+function eliminar_avaliacao(botao) {ss
 
   let linha = botao.parent().parent().parent().parent();
   let idpessoa = linha.attr("idp");
