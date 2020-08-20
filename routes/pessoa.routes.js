@@ -6,6 +6,8 @@ var dados = require('./../model/Usuario');
 const bcrypt = require("bcryptjs");
 const {eAdmin} = require("../helpers/eAdmin");
 const {is_pessoa} = require("../helpers/is_pessoa");
+const {is_aluno} = require("../helpers/is_aluno");
+const {is_professor} = require("../helpers/is_professor");
 
 const passport = require("passport");
 

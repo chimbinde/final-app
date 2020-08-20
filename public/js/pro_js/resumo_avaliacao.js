@@ -1,7 +1,8 @@
 //const post = require('./../../../config/config');
 //const post = require('./../config/config');
 //const post=require('model/config');
-const urlBase = "http://localhost:3000/";
+//const urlBase = "http://localhost:3000/";
+const urlBase = "https://exameonline-api.tic00.com/";
 window.onload = () => {
     var id = 1;
     // alert(post.getURL());

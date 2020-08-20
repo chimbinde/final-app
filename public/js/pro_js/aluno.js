@@ -1,4 +1,5 @@
-const urlBase = "http://localhost:3000/"
+//const urlBase = "http://localhost:3000/"
+const urlBase = "https://exameonline-api.tic00.com/";
 //const idpessoa = document.getElementById("idpessoa_").value;
 
 //escolas();

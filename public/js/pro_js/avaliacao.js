@@ -1,4 +1,5 @@
-const urlBase = "http://localhost:3000/";
+//const urlBase = "http://localhost:3000/";
+const urlBase = "https://exameonline-api.tic00.com/";
 var tempo = new Number();
 //=================================================================
 tempo = 50;

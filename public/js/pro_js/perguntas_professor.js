@@ -1,13 +1,15 @@
 //const post = require('./../../../config/config');
 //const post = require('./../config/config');
 //const post=require('model/config');
-const urlBase = "http://localhost:3000/";
+//const urlBase = "http://localhost:3000/";
+const urlBase = "https://exameonline-api.tic00.com/";
+
 window.onload = () => {
   var id = 1;
   load_disciplinas();
   tbl_avaliacoes();
-  // alert(post.getURL());
-  //  load_disciplinas();
+  //alert(post.getURL());
+  //load_disciplinas();
   //alert("eureca..");
 
 }
@@ -162,7 +164,7 @@ function carregar_questoes_avaliacao(avaliacao_id, iddoc, iddisciplina, fechado,
                             <tr  >
                               <td>
                                   <div class="form-group">
-                                  <button onclick="editar_pergunta($(this));" class="btn form-control btn-info" rows="1" id="comment">salvar</button>
+                                  <button onclick="editar_pergunta($(this));" class="btn form-control btn-info col-md-2" rows="1" id="comment">salvar</button>
                                 </div>
                               </td>
                               </tr>
@@ -228,7 +230,7 @@ function carregar_questoes_avaliacao(avaliacao_id, iddoc, iddisciplina, fechado,
                 <tr>
                 <td>
                     <div class="form-group">
-                    <button onclick="nova_perqgunta($(this));" class="btn form-control btn-info" rows="1" id="comment">salvar</button>
+                    <button onclick="nova_perqgunta($(this));" class="btn form-control btn-info col-md-2" rows="1" id="comment">salvar</button>
                   </div>
                 </td>
                 </tr>

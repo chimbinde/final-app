@@ -21,11 +21,11 @@
     <!-- Info boxes -->
 
 
-    <div class="row">
-      <div class="card card-default">
+    <div class="row ">
+      <div class="card card-default " style="width:100%">
         <!-- /.card-header -->
-        <form action="/aluno/atualizacao" method="post">
-          <input type="hidden" id="idpessoa" name="idpessoa" value="{{user.key}}"></input>
+        <form action="/aluno/atualizacao" method="post" >
+         <!-- <input type="hidden" id="idpessoa" name="idpessoa" value="{{user.key}}"></input> -->
 
           <div class="card-body">
             <font> DADOS DO USUARIO</font>
@@ -34,7 +34,7 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label>Tipo usuario</label>
-                  <select name="isestudante" id="isestudante" class="form-control select2bs4" style="width: 100%;">
+                  <select disabled name="isestudante" id="isestudante" class="form-control select2bs4" style="width: 100%;">
                     <option value="-1">Estudante e Funcionario</option>
                     <option value="1" selected="selected">Estudante</option>
                     <option value="0">Funcionario</option>
