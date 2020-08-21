@@ -1,6 +1,8 @@
 window.onload = () => {
 
-   teste();
+  // teste();
+
+  alert(MD5('12345'));
 
     var modal = $(".modal-content");
     var body = $(window);

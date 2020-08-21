@@ -13,19 +13,23 @@ const passport = require("passport");
 
 router.get('/',(req,res)=>{
     // res.render("admin/index");
-     res.send("Teste de routas admin entrou");
+   
+    var pass="12345";
+
+     res.send("Teste de routas admin entrou"+CryptoJS.MD5(pass));
  });
  router.get('/loginpage',(req,res)=>{
      res.render("login");
  });
 
  router.get('/teste',(req,res)=>{
-    // res.render("admin/index");
+    res.render("aluno/teste");
     //var usuario = post.findEmail(email);
-    var usuario = dados.listar();
+    //var usuario = dados.listar();
+   
+   // res.send("off>>>"+ '12345'.hash());
     
-    
-     res.send("off"+usuario);
+    // res.send("off"+usuario);
  });
  router.get('/teste1',(req,res)=>{
     //res.render("pessoa/login");
